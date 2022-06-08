@@ -1,0 +1,28 @@
+networks:
+  Airbnb-Network:
+
+services:
+ airbnbapi1:
+   build: 
+     context: .
+     dockerfile: src/Airbnb.API/Dockerfile
+   ports:
+     - "9000" # don't bind to host just expose 9000 to docker network
+   container_name: airbnb-api-1
+   restart: unless-stopped
+   hostname: AirbnbAPI1
+   networks: 
+     - Airbnb-Network
+
+ NginxService:
+   image: nginx:1.22.0-perl
+   container_name: NginxContainer
+   restart: unless-stopped
+   ports:
+     - "80:80" 
+   networks: 
+     - Airbnb-Network
+   volumes:
+     - type: bind
+       target: /etc/nginx/nginx.conf
+       source: ./nginx.conf
