@@ -7,7 +7,7 @@ services:
      context: .
      dockerfile: src/Airbnb.API/Dockerfile
    ports:
-     - "9000" # don't bind to host just expose 9000 to docker network
+     - "20000" # don't bind to host just expose 9000 to docker network
    container_name: airbnb-api-1
    restart: unless-stopped
    hostname: AirbnbAPI1
