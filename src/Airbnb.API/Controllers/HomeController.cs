@@ -5,5 +5,19 @@ namespace Airbnb.API.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index() => Content($"{Dns.GetHostName()}{Environment.NewLine}{DateTimeOffset.Now}");
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        this._logger = logger;
+    }
+    public IActionResult Index()
+    {
+        // creating a scope because of readability for when having multiple instances of this app with "docker compose up"
+        string hostName = Dns.GetHostName();
+        using (_logger.BeginScope("HostName: {HostName}", hostName))
+        {
+            return Content($"{hostName}{Environment.NewLine}Timestamp:{DateTimeOffset.Now}");
+        }
+    }
 }
