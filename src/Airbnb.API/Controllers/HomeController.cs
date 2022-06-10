@@ -17,6 +17,7 @@ public class HomeController : Controller
         string hostName = Dns.GetHostName();
         using (_logger.BeginScope("HostName: {HostName}", hostName))
         {
+            _logger.LogInformation("Handling request");
             return Content($"HostName: {hostName}{Environment.NewLine}Timestamp: {DateTimeOffset.Now}");
         }
     }
