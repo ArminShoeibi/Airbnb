@@ -7,6 +7,6 @@ RUN dotnet publish "src/Airbnb.API/Airbnb.API.csproj" -c Release -o Publish/
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0.5-bullseye-slim-amd64
 WORKDIR /app
-EXPOSE 9000
+EXPOSE 20000
 COPY --from=sdk /Airbnb-Source/Publish .
 ENTRYPOINT ["dotnet", "Airbnb.API.dll"]
