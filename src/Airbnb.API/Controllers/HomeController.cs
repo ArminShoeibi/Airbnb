@@ -13,7 +13,7 @@ public class HomeController : Controller
     }
     public IActionResult Index()
     {
-        // creating a scope because of readability for when having multiple instances of this app with "docker compose up"
+        // creating a scope because of readability. It is good when you have multiple instances of this app with "docker compose up --scale"
         string hostName = Dns.GetHostName();
         using (_logger.BeginScope("HostName: {HostName}", hostName))
         {
